@@ -94,7 +94,7 @@ describe('테스트', () => {
 
   test('주말 또는 공휴일 예외 테스트', async () => {
     mockNowDate('2024-12-14');
-    x;
+
     await runExceptions({
       inputs: ['1'],
       inputsToTerminate: INPUTS_TO_TERMINATE,
