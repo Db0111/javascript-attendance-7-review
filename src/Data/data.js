@@ -15,7 +15,7 @@ export function getDate() {
   let date = currentDate.getDate();
   const dayList = ['일', '월', '화', '수', '목', '금', '토'];
   //수정 필요
-  let day = dayList[currentDate.getDay() - 1];
+  let day = dayList[currentDate.getDay()];
 
   return { date, day };
 }
