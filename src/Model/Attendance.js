@@ -21,23 +21,21 @@ class Attendance {
     // checkAbsenceData(nickname, this.attendanceData);
 
     const { date, day } = getDate();
-    console.log('요알아여 아것이', day);
     const absence = Attendance.checkAbsent(day, attendanceTime);
-    OutputView.printMessage(`12월 ${date}일 ${day}요일 ${attendanceTime} (${this.attendanceData.absence})`);
-    console.log(this.attendanceData);
+    OutputView.printMessage(`12월 ${date}일 ${day}요일 ${attendanceTime} (${absence})`);
   }
 
   static checkAbsent(day, attendanceTime) {
     const hour = Number(splitInput(attendanceTime)[0]);
     const minute = Number(splitInput(attendanceTime)[1]);
     let absence = '';
-    console.log('day', day, 'attendanceTime', attendanceTime);
 
     if (hour >= 8 && hour <= educateTime[day].startHour) {
-      console.log('짱수 hour', hour);
       absence = '출석';
+      console.log('짱수 출석했니????????', absence);
       return absence;
     }
+
     if (hour >= educateTime[day].startHour && hour <= educateTime[day]['endHour']) {
       if (minute > 5 && minute <= 30) {
         absence = '지각';
