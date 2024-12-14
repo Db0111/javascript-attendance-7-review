@@ -27,8 +27,6 @@ class FileReader {
       if (!attendanceData[nickname]) {
         attendanceData[nickname] = { attendance: [] };
       }
-
-      // 각 재고 항목에 가격 포함
       attendanceData[nickname].attendance.push({ datetime });
     });
 
