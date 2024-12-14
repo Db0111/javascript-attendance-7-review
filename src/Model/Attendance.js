@@ -21,6 +21,7 @@ class Attendance {
     // checkAbsenceData(nickname, this.attendanceData);
 
     const { date, day } = getDate();
+    console.log('요알아여 아것이', day);
     const absence = Attendance.checkAbsent(day, attendanceTime);
     OutputView.printMessage(`12월 ${date}일 ${day}요일 ${attendanceTime} (${this.attendanceData.absence})`);
     console.log(this.attendanceData);
@@ -31,6 +32,12 @@ class Attendance {
     const minute = Number(splitInput(attendanceTime)[1]);
     let absence = '';
     console.log('day', day, 'attendanceTime', attendanceTime);
+
+    if (hour >= 8 && hour <= educateTime[day].startHour) {
+      console.log('짱수 hour', hour);
+      absence = '출석';
+      return absence;
+    }
     if (hour >= educateTime[day].startHour && hour <= educateTime[day]['endHour']) {
       if (minute > 5 && minute <= 30) {
         absence = '지각';
@@ -46,6 +53,13 @@ class Attendance {
   async fixAttendance() {
     const nickname = await InputView.getInput(`출석을 수정하려는 크루의 닉네임을 입력해 주세요.\n`);
     const fixDate = await InputView.getInput(`수정하려는 날짜(일)를 입력해 주세요.\n`);
+    const fixTime = await InputView.getInput(`언제로 변경하겠습니까?\n`);
+
+    const crewAttendanceData = checkAbsenceData(nickname, this.attendanceData);
+    crewAttendanceData.date = fixDate;
+    crewAttendanceData.attendanceTime = fixTime;
+    OutputView.printMessage(`12월 03일 화요일 10:07 (지각) -> ${fixTime} (출석) 수정 완료!
+    `);
   }
   async checkAttendance() {
     const nickname = await InputView.getInput(`닉네임을 입력해 주세요.\n`);
